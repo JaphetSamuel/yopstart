@@ -1,0 +1,12 @@
+<nav class="navbar">
+        <a href="" class="navbar-brand navbar-expand-lg">
+            YOPSTART
+        </a>
+        {% if request.user.is_authenticated %}
+            <button class="btn btn-red">Creer un projet</button>
+    {% endif %}
+        <form action="" class="form-inline my-2 ml-auto my-lg-0">
+            <input type="search" class="form-control" placeholder="projet, personne,...">
+            <button class="btn btn-outline-blue btn-sm">Rechercher</button>
+        </form>
+</nav>

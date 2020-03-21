@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block main %}
+    <main class="container-fluid row">
+
+        <div class="d-flex flex-center  col-lg-6 offset-3 col-xs-12">
+            <!-- Default form register -->
+<form class="text-center border border-light p-5 row" action="#!">
+
+    <p class="h4 mb-4 text-center">Inscription</p>
+
+    <div class="col col-xs-12 col-12">
+        {% csrf_token %}
+        {{ creation_form.as_p }}
+    <!-- Newsletter -->
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="defaultRegisterFormNewsletter">
+    </div>
+
+    <!-- Sign up button -->
+    <button class="btn btn-info my-4 btn-block col-4 offset-4 col" type="submit">S'inscrire</button>
+
+    <!-- Social register -->
+    <p>or sign up with:</p>
+
+    <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
+    <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
+    <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
+    <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
+
+    <hr>
+
+    <!-- Terms of service -->
+    <p>En cliquant sur
+        <em>s'incrire</em> vous acceptez
+        <a href="" target="_blank">terms of service</a>
+
+</form>
+            <form action="#" class="form-lg">
+                {% csrf_token %}
+                {{ creation_form.as_p }}
+                <input type="submit" value="inscription">
+            </form>
+<!-- Default form register -->
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+
+{% block main %}
+    {% include 'layout/navbar.html' %}
+
+    <main class="container-fluid row mt-3 p-1 ">
+        <div class="col-md-4 col-xs-12 ">
+            <div class="card">
+                <div class="card-header">
+                    <span class="align-content-center">{{ object.patronyme }}</span>
+                </div>
+                <img class="img-fluid rounded" src="{{ MEDIA_URL }}{{ object.img_url }}" width="700" height="400" alt="probleme de telechargement">
+                <div class="card-body row">
+                    <div class="card blue-gradient col-5 mr-1">
+                        <div class="card-body">
+                            <span class="display-4">{{ object.relation.count }}</span>
+                        </div>
+                        <div class="card-footer">Relations</div>
+                    </div>
+                    <div class="card heavy-rain-gradient mr-1 col-5">
+                        <div class="card-body">
+                            <span class="display-4">{{ object.domaine.count }}</span>
+                        </div>
+                        <div class="card-footer">Domaines</div>
+                    </div>
+                    <div class="card frozen-dreams-gradient mr-1 col-5">
+                        <div class="card-body">
+                            <span class="display-4">{{ object.competences.count }}</span>
+                        </div>
+                        <div class="card-footer">Competences</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="panel blue-gradient pt-4 p-1 rounded">
+                <div class="panel-body white-text">
+                    <h3 class="text-center">
+                        <i class="fa fa-book-open"></i>
+                        Biographie</h3>
+                    <p>{{ object.bio }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-inline">
+                        <b class="">Comptences</b>
+                        <br>
+                        {% for comp in object.competences.all %}
+                            <li class="list-inline-item">{{ comp.label }}</li>
+                            {% empty %}
+                            <span>Pas de competences</span>
+                        {% endfor %}
+                    </ul>
+                    <ul class="list-inline">
+                        <b class="">Domaines</b>
+                        <br>
+                        {% for dom in object.domaine.all %}
+                            <li class="list-inline-item">{{ dom.label }}</li>
+                            {% empty %}
+                            <span>Pas de competences</span>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock main %}
