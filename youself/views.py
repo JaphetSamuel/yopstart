@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from django.views.decorators.http import require_http_methods
+from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import TextInput, PasswordInput, EmailInput
 from .models import *
@@ -35,9 +35,28 @@ class CustomUserCreationform(UserCreationForm):
 def InscriptionView(request):
     list_competences = Competence.objects.all()
     domaines = Domaine.objects.all()
+    ctuf = CustomUserCreationform()
     contexte = {
         'list_competences':list_competences,
         'domaines':domaines,
         'creation_form': CustomUserCreationform()
     }
+
     return render(request,'account/inscription.html',contexte)
+
+def createUser(request):
+    username = request.POST['username']
+    prename = request.POST['prename']
+    email = request.POST['email']
+    name = request.POST['name']
+    mdp = request.POST['pass']
+    msg = f"username {username}, nom {name}, prenom {prename}, mot de passe {mdp}"
+
+    if username != '' and prename != '' and name != '' and mdp != '' and email != '':
+        u = User(username=username, first_name=prename, last_name=name, email=email)
+        u.set_password(mdp)
+        u.save()
+        ut = Utilisateur(user=u)
+        ut.save()
+
+    return redirect('profile',pk=ut.id)

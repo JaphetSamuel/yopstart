@@ -1,46 +1,49 @@
 {% extends 'index.html' %}
 
 {% block main %}
-    <main class="container-fluid row">
+    <main class="container-fluid row mt-lg-4">
 
         <div class="d-flex flex-center  col-lg-6 offset-3 col-xs-12">
             <!-- Default form register -->
-<form class="text-center border border-light p-5 row" action="#!">
+<form class="text-center border border-light p-5 row" method="post" action="{% url 'createUser' %}">
 
-    <p class="h4 mb-4 text-center">Inscription</p>
+    <p class=" mb-4 text-center col offset-3 h2">INSCRIPTION</p>
 
     <div class="col col-xs-12 col-12">
         {% csrf_token %}
-        {{ creation_form.as_p }}
+        <div class="mb-4">
+            <input type="text" placeholder="nom d'utilisateur" name="username" class="form-control" required>
+            <input type="email" placeholder="email" name="email" class="form-control mt-3">
+        </div>
+        <div class="mb-4 form-row">
+            <input type="text" placeholder="nom" name="name" class="form-control mb-2" required>
+            <input type="text" placeholder="prenom" name="prename" class="form-control mb-2" required>
+        </div>
+        <div class="mb-4">
+            <input type="password" class="form-control mt-1" name="pass" required>
+            <div>
+                <p class="text-muted">A-Z, 0-9, @, _ </p>
+            </div>
+            <input type="password" class="form-control mt-1" name="repass" required>
+        </div>
     <!-- Newsletter -->
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="defaultRegisterFormNewsletter">
     </div>
 
     <!-- Sign up button -->
-    <button class="btn btn-info my-4 btn-block col-4 offset-4 col" type="submit">S'inscrire</button>
-
-    <!-- Social register -->
-    <p>or sign up with:</p>
-
-    <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
-    <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
-    <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
-    <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
-
-    <hr>
+    <button class="btn btn-info col-4 offset-4 col" type="submit">S'inscrire</button>
 
     <!-- Terms of service -->
-    <p>En cliquant sur
+    <p>
+        En cliquant sur
         <em>s'incrire</em> vous acceptez
         <a href="" target="_blank">terms of service</a>
+    </p>
+    </div>
 
 </form>
-            <form action="#" class="form-lg">
-                {% csrf_token %}
-                {{ creation_form.as_p }}
-                <input type="submit" value="inscription">
-            </form>
+
 <!-- Default form register -->
         </div>
     </main>

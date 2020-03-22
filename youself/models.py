@@ -20,12 +20,12 @@ class Domaine(models.Model):
 class Utilisateur(models.Model):
     relation = models.ManyToManyField('Utilisateur', blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, limit_choices_to={'is_superuser':False})
-    date_naissance = models.DateField(blank=True)
-    bio = models.TextField()
+    date_naissance = models.DateField(blank=True, auto_now=True)
+    bio = models.TextField(blank=True)
     pays = models.CharField(max_length=50, blank=True)
     competences = models.ManyToManyField(Competence,blank=True)
     domaine = models.ManyToManyField(Domaine, blank=True)
-    img_url = models.ImageField(verbose_name='photo de profile', blank=True, upload_to='profile/')
+    img_url = models.ImageField(verbose_name='photo de profile', blank=True, upload_to='profile/', default='profile/default-img.png')
 
     def __str__(self):
         return self.user.username

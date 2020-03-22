@@ -11,6 +11,11 @@
                 </div>
                 <img class="img-fluid rounded" src="{{ MEDIA_URL }}{{ object.img_url }}" width="700" height="400" alt="probleme de telechargement">
                 <div class="card-body row">
+                    <div class="col col-12 text-right">
+                        <button class="btn btn-rounded btn-sm btn-outline-blue-grey">
+                            <i class="fa fa-pencil-alt mr-1"></i>Modifier
+                        </button>
+                    </div>
                     <div class="card blue-gradient col-5 mr-1">
                         <div class="card-body">
                             <span class="display-4">{{ object.relation.count }}</span>
