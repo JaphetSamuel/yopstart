@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'index.html' %}
 
-</body>
-</html>
+{% block main %}
+    {% include 'layout/navbar.html' %}
+    <div class="jumbotron jumbotron-fluid m-0 p-5 aqua-gradient white-text row">
+        <div class=" col col-xs-12 col-md-6">
+            <span class="display-4 font-weight-bold">Yopstart</span>
+        <div class="right h2">
+            <p class="">Rechercher une équipe de dévéloppeur ou un investisseur pour mener a bien votre projet</p>
+        </div>
+        </div>
+        <div class="col col-xs-12 col-md-6">
+            <div class="panel">
+                <div class="display-4 panel-heading font-weight-bolder">+{{ list_utilis.count }}</div>
+                <span class="h3-responsive panel-footer">Utilisateurs</span>
+            </div>
+            <div class=" col col-xs-12 col-md-6 offset-lg-3 panel">
+                <div class="display-4 panel-heading font-weight-bolder">{{list_projets.count}}</div>
+                <span class="h3-responsive panel-footer">Projets</span>
+            </div>
+
+        </div>
+    </div>
+    <div>
+    {% for dev in devs %}
+        {{ dev.user.username }}
+    {% endfor %}
+
+    </div>
+    <div class="panel m-3">
+        <div class="panel-body row grid">
+            <aside class="card col-xs-12 col-sm-12 col col-md-3">
+                <header class="card-header font-weight-bold">Filtre :</header>
+
+                <form class="card-body">
+                    <div class="mb-1">
+                    <input type="checkbox" name="devc" value="2" id="dev">
+                        <label for="dev">Dévéloppeurs</label>
+                    </div>
+                    <div class="mb-1">
+                    <input type="checkbox" name="invest" value="3" id="invest">
+                        <label for="invest">Investisseurs</label>
+                    </div>
+                    <div class="mb-1">
+                    <input type="checkbox" name="proj" value="4" id="proj">
+                        <label for="proj">Projet</label>
+                    </div>
+
+
+                    <label for="dom">Domaines</label>
+                    <select name="domaine" id="dom" class="select-dropdown form-control mb-3">
+                        {% for dom in list_domaines %}
+                            <option value="{{ dom.label }}"> {{ dom.label }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="submit" class="form-control amy-crisp-gradient white-text" value="Rechercher">
+                </form>
+            </aside>
+            <main class="col col-xs-12 col-md-9 mt-3">
+                    {% for proj in list_projets %}
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <span class="left">{{ proj.porteurs }}</span>
+                                <span class="right">{{ proj.date_debut }}</span>
+                            </div>
+                        <div class="card-body row">
+                            <div class="col col-xs-12 col-md-2">
+                                <i class="fa fa-store-alt fa-5x"></i>
+                            </div>
+                            <div class="col col-xs-12 col-md-10">
+                                <p>{{ proj.description }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    {% endfor %}
+
+            </main>
+        </div>
+    </div>
+{% endblock %}

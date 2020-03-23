@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import TextInput, PasswordInput, EmailInput
 from .models import *
@@ -58,5 +58,23 @@ def createUser(request):
         u.save()
         ut = Utilisateur(user=u)
         ut.save()
+        login(request,u)
 
     return redirect('profile',pk=ut.id)
+
+
+def home(request):
+    contexte = {
+        'domaine' : Domaine.objects.all(),
+        'Competence' : Competence.objects.all()
+    }
+
+    devs = Utilisateur.objects.all()
+    # if request.GET['domaine'] and request.GET['domaine'] != '':
+    #     devs = Utilisateur.objects.get(domaine = request.GET['domaine'])
+    # if request.GET['competence'] and request.GET['competence'] != '' :
+    #     devs = Utilisateur.objects.get(competences = request.GET['competence'])
+
+    #contexte['devs'] = devs
+
+    return render(request, template_name='home.html', context=contexte)
