@@ -33,9 +33,14 @@
                 <header class="card-header font-weight-bold">Filtre :</header>
 
                 <form class="card-body">
-                    <div class="mb-1">
-                    <input type="checkbox" name="devc" value="2" id="dev">
-                        <label for="dev">Dévéloppeurs</label>
+                    <!-- Default unchecked -->
+<div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+    <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label>
+</div>
+                    <div class="mb-1 custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="devc" value="2" id="dev">
+                        <label for="dev" class="custom-control-label">Dévéloppeurs</label>
                     </div>
                     <div class="mb-1">
                     <input type="checkbox" name="invest" value="3" id="invest">
@@ -49,6 +54,7 @@
 
                     <label for="dom">Domaines</label>
                     <select name="domaine" id="dom" class="select-dropdown form-control mb-3">
+                        <option value=""></option>
                         {% for dom in list_domaines %}
                             <option value="{{ dom.label }}"> {{ dom.label }}</option>
                         {% endfor %}
@@ -60,10 +66,10 @@
             <main class="col col-xs-12 col-md-9 mt-3">
                     {% for proj in list_projets %}
                         <div class="card mb-3">
-                            <div class="card-header">
+                            <div class="">
                                 <span class="left">{{ proj.porteurs }}</span>
-                                <span class="right">{{ proj.date_debut }}</span>
                             </div>
+                            <hr class="divider">
                         <div class="card-body row">
                             <div class="col col-xs-12 col-md-2">
                                 <i class="fa fa-store-alt fa-5x"></i>
@@ -73,6 +79,8 @@
                             </div>
                         </div>
                         </div>
+                        {% empty %}
+                        <span>Pas de resultats pour votre recherche</span>
                     {% endfor %}
 
             </main>

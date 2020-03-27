@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block main  %}
+<div class="container-fluid justify-content-center mt-5">
+
+
+<form action="{% url 'login' %}" method="post" class=" col col-sm-12 offset-md-4 col-md-4 col">
+
+    <fieldset>
+        <legend>Connexion</legend>
+
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            <p class="text-danger"> Erreur dans le nom d'utilisateur ou le mot de passe</p>
+        </div>
+    {% endif %}
+        <div class="custom-control">
+            <label for="_username">Nom d'utilisateur</label>
+            {{ form.username }}
+        </div>
+        <br>
+        <div class="custom-control">
+            <label for="_password">Mot de passe</label>
+            {{ form.password }}
+        </div>
+        {% csrf_token %}
+        <input type="submit" class="mt-2 btn btn²" value="connexion" >
+    </fieldset>
+    <a href="" class="mt-5 ml-4">Mot de passe oublié</a>
+</form>
+</div>
+{% endblock %}

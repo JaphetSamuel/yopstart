@@ -1,17 +1,19 @@
-<nav class="navbar">
-        <a href="{% url 'home' %}" class="navbar-brand navbar-expand-lg">
+
+<nav class="navbar bg-transparent shadow-none scrolling-navbar aqua-gradient">
+        <a href="{% url 'home' %}" class="navbar-brand navbar-expand-lg white-text">
             YOPSTART
         </a>
         {% if request.user.is_authenticated %}
-            <button class="btn btn-red">Creer un projet</button>
+            <button class="btn btn-red btn-sm">Creer un projet</button>
     {% endif %}
         <div class="my-2 ml-auto my-lg-0">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'profile' request.user.utilisateur.id %}" class="font-weight-bold">{{ request.user.username |capfirst }}</a>
-                <img src="{{ MEDIA_URL }}{{request.user.utilisateur.img_url}}" width="50" alt="introuvable" CLASS="mr-1">
+                <img src="{{ MEDIA_URL }}{{request.user.utilisateur.img_url}}" width="50" alt="introuvable" class="mr-1 img-circle">
+                <a href="{% url 'profile' request.user.utilisateur.id %}" class="font-weight-bold white-text">{{ request.user.username |capfirst }}</a>
+                <a href="{% url 'deconnexion' %}" class="white-text"> Deconnexion</a>
                 {% else %}
                 <div class="form-inline">
-                <a class="form-control white-text bg-info mr-2">Connexion</a>
+                <a href="{% url 'login' %}" class="form-control white-text bg-info mr-2">Connexion</a>
                 <a href="{% url 'inscription' %}" class="form-control btn-dark-green  white-text mr-2">Inscription</a>
                 </div>
             {% endif %}

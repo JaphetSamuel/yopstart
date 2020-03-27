@@ -1,18 +1,20 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
-from django.contrib.auth import authenticate, login
+from django.views import generic
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpRequest
 from django.forms import TextInput, PasswordInput, EmailInput
 from .models import *
 
 # Create y
 # our views here.
 
-def index(request):
-    return render(request, template_name="index.html")
+class index(generic.base.TemplateView):
+    template_name = 'index.html'
 
 
-class UtilisateurDetails(DetailView):
+class UtilisateurDetails(generic.DetailView):
     model = Utilisateur
     template_name = 'youself/u_details.html'
 
@@ -32,17 +34,26 @@ class CustomUserCreationform(UserCreationForm):
         }
 
 
-def InscriptionView(request):
+class InscriptionView(generic.TemplateView):
     list_competences = Competence.objects.all()
     domaines = Domaine.objects.all()
     ctuf = CustomUserCreationform()
-    contexte = {
-        'list_competences':list_competences,
-        'domaines':domaines,
-        'creation_form': CustomUserCreationform()
-    }
+    template_name = 'account/inscription.html'
 
-    return render(request,'account/inscription.html',contexte)
+    def get_context_data(self, **kwargs):
+        contexte = super().get_context_data(**kwargs)
+        customdict = {
+        'list_competences':self.list_competences,
+        'domaines':self.domaines,
+        'creation_form': CustomUserCreationform(),
+        **contexte
+        }
+
+        return customdict
+
+class Connexion(LoginView):
+    template_name = 'account/connexion.html'
+
 
 def createUser(request):
     username = request.POST['username']
@@ -62,6 +73,12 @@ def createUser(request):
 
     return redirect('profile',pk=ut.id)
 
+class DeconnexionView(generic.RedirectView):
+    pattern_name = 'home'
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return super().get(request, **kwargs)
 
 def home(request):
     contexte = {
