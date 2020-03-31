@@ -14,7 +14,7 @@ class Projet(models.Model):
     )
 
     nom = models.CharField(max_length=100)
-    porteurs = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    porteurs = models.ForeignKey(Utilisateur, on_delete=models.CASCADE, blank=True)
     equipe = models.ManyToManyField(Utilisateur, blank=True),
     domaine = models.ForeignKey(Domaine, on_delete=models.CASCADE)
     description = models.TextField(blank=True)

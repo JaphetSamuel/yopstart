@@ -5,11 +5,11 @@
     <div class="jumbotron jumbotron-fluid m-0 p-5 aqua-gradient white-text row">
         <div class=" col col-xs-12 col-md-6">
             <span class="display-4 font-weight-bold">Yopstart</span>
-        <div class="right h2">
-            <p class="">Rechercher une équipe de dévéloppeur ou un investisseur pour mener a bien votre projet</p>
+            <div class="right h2">
+                <p class="">Rechercher une équipe de dévéloppeur ou un investisseur pour mener a bien votre projet</p>
+            </div>
         </div>
-        </div>
-        <div class="col col-xs-12 col-md-6">
+        <div class="col col-xs-12 col-md-6 opacity-80">
             <div class="panel">
                 <div class="display-4 panel-heading font-weight-bolder">+{{ list_utilis.count }}</div>
                 <span class="h3-responsive panel-footer">Utilisateurs</span>
@@ -33,22 +33,18 @@
                 <header class="card-header font-weight-bold">Filtre :</header>
 
                 <form class="card-body">
-                    <!-- Default unchecked -->
-<div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-    <label class="custom-control-label" for="defaultUnchecked">Default unchecked</label>
-</div>
+
                     <div class="mb-1 custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="devc" value="2" id="dev">
+                        <input type="checkbox" class="custom-control-input" name="devc" value="2" id="dev">
                         <label for="dev" class="custom-control-label">Dévéloppeurs</label>
                     </div>
-                    <div class="mb-1">
-                    <input type="checkbox" name="invest" value="3" id="invest">
-                        <label for="invest">Investisseurs</label>
+                    <div class="mb-1 custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="devc" value="2" id="dev">
+                        <label for="dev" class="custom-control-label">Investisseur</label>
                     </div>
-                    <div class="mb-1">
-                    <input type="checkbox" name="proj" value="4" id="proj">
-                        <label for="proj">Projet</label>
+                    <div class="mb-1 custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="devc" value="2" id="dev" checked>
+                        <label for="dev" class="custom-control-label">Projets</label>
                     </div>
 
 
@@ -64,7 +60,10 @@
                 </form>
             </aside>
             <main class="col col-xs-12 col-md-9 mt-3">
-                    {% for proj in list_projets %}
+                <div class="flex-row">
+                    <a class="align-self-end btn btn-info btn-sm">Liste complète</a>
+                </div>
+                {% for proj in list_projets %}
                         <div class="card mb-3">
                             <div class="">
                                 <span class="left">{{ proj.porteurs }}</span>

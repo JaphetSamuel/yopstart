@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 from youself import views as youview
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', youview.home, name='home'),
-    path('', include('youself.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path('home/', youview.home, name='home'),
+                  path('', include('youself.urls')),
+                  path('projet/', include('youproj.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

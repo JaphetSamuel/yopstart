@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block main %}
+    {% include 'layout/navbar.html' %}
+    <main class="container-fluid aqua-gradient" style="height: 100vh;">
+        <div class="row flex-center">
+            <h1 class="text-center">Creation de projet</h1>
+            <form action="{% url 'projet-creation' %}" method="post" class="col-xs-12 m-5 row bg-white p-5 rounded">
+                {% if form.errors %}
+                    <div class="alert-danger col-12">
+                        <p>Erreur dans le formulaire</p>
+                        <blocquote>{{ form.errors }}</blocquote>
+                    </div>
+                {% endif %}
+                {% comment %} <input type="text" readonly value="{{ request.user.utilisateur}}" name="porteurs"> {% endcomment %}
+
+                <div class="col-xs-12 col-md-6">
+
+                    <div class="custom-control mb-2">
+                        <label for="id_nom">nom du projet</label>
+                        <input type="text" name="nom" class="form-control" id="id_nom">
+                    </div>
+
+                    <div class="custom-control mb-2">
+                        <label for="id_domaine">Domaine</label>
+                        {{ form.domaine }}
+                    </div>
+                    <div class="custom-control mb-2">
+                        <label for="id_description">Description du projet</label>
+                        <textarea name="description" id="id_description" cols="20" rows="8"
+                                  class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="custom-control mb-2">
+                        <label for="id_phase">Phase du projet</label>
+                        {{ form.phase }}
+                    </div>
+                    <div class="custom-control mb-2">
+                        <label for="id_avancement">Etat d'avancement</label>
+                        <textarea name="avancement" id="id_avancement" cols="20" rows="8"
+                                  class="form-control"></textarea>
+                    </div>
+                    <div class="custom-control mb-2">
+                        <label for="id_lien_depot">
+                            <i class="fa fa-git"></i>
+                            lien du depot
+                        </label>
+                        <input type="url" name="lien_depot" id="id_lien_depot" class="form-control">
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-info mt-3">
+                {% csrf_token %}
+            </form>
+        </div>
+    </main>
+{% endblock %}
