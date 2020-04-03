@@ -1,0 +1,26 @@
+{% extends 'blank.html' %}
+
+{% block main-content %}
+    {% include 'layout/m-navbar.html' %}
+    <main class="content">
+        <div class="container-fluid m-5">
+            <div class="box p-4">
+                <h1 class="display-3">{{ object.nom }}</h1>
+                <div class="image">
+                    <!-- todo carousel -->
+                    <img src="{{ MEDIA_URL }}{{ object.img_url }}" alt="none">
+                </div>
+                <p>
+                <h2>Description</h2>
+                <p>{{ object.description }}</p>
+                </p>
+                <p>
+                    <b>Porteur:</b> <span>{{ object.porteurs|capfirst }}</span> <br>
+                    <b>Domaine:</b> <span>{{ object.domaine }}</span> <br>
+                    <b>Date de debut:</b> <span>{{ object.date_debut |time|default_if_none:'non specifié' }}</span> <br>
+                    <b>Phase actuelle:</b> <span>{{ object.phase }}</span> <br>
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock main-content %}

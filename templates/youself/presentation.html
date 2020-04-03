@@ -1,0 +1,63 @@
+{% extends 'blank.html' %}
+
+{% block main-content %}
+    {% include 'layout/navbar.html' %}
+    {% include 'layout/side-navbar.html' %}
+    <div class="content-wrapper">
+        <div class="box m-5">
+            <div class="box ">
+                <div class="box-header">
+                    <h4 class="box-title h4">Profile</h4>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="box-widget widget-user">
+                        <div class="widget-user-header bg-aqua-gradient">
+                            <h3 class="widget-user-username">{{ object.user.get_full_name | capfirst }}</h3>
+                            <h5 class="widget-user-desc">{{ object.domaine.first }}</h5>
+                        </div>
+                        <div class="widget-user-image">
+                            <img src="{{ MEDIA_URL }}{{ object.img_url }}" class="img-circle circle" alt="pas d'image">
+                        </div>
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">{{ object.domaine.count }}</h5>
+                                        <span class="description-text">DOMAINES</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 border-right">
+                                    <div class="description-block">
+                                        <h5 class="description-header">{{ object.relation.count }}</h5>
+                                        <span class="description-text">Contacts</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4">
+                                    <div class="description-block">
+                                        <h5 class="description-header">{{ object.projet_set.count }}</h5>
+                                        <span class="description-text">Projet(s)</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <ul class="nav nav-stacked">
+                                <li></li>
+                            </ul>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main-content %}

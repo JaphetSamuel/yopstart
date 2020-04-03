@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from django.views.generic.base import TemplateResponse
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('', views.index.as_view(), name='index'),

@@ -1,5 +1,28 @@
-{% extends 'index.html' %}
+{% extends 'blank.html' %}
 
-{% block main %}
+{% block main-content %}
 
-{% endblock %}
+    {% include 'layout/m-navbar.html' %}
+    {% include 'layout/side-navbar.html' %}
+
+    <main class=" content-wrapper">
+        <div class="row">
+            <div class="box col col-xs-12 col-md-5 mr-3">
+                <div class="box-header">
+                    <h1 class="box-title">
+                        Description
+                    </h1>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    {{ projet.description }}
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock main-content %}

@@ -1,0 +1,36 @@
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+<div class="main-header">
+    <a href="{% url 'home' %}" class="logo">
+        Yopstart
+    </a>
+    <nav class="navbar navbar-static-top p-0" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+        <div class="my-2 ml-auto mr-2 my-lg-0 white-text skin-black-light">
+            {% if request.user.is_authenticated %}
+                <img src="{{ MEDIA_URL }}{{ request.user.utilisateur.img_url }}" width="50" alt="introuvable"
+                     class="mr-1 img-circle">
+                <a href="{% url 'profile' request.user.utilisateur.id %}"
+                   class="font-weight-bold white-text">{{ request.user.username |capfirst }}</a>
+                <a href="{% url 'deconnexion' %}"> <span class="white-text">Deconnexion</span></a>
+            {% else %}
+                <div class="form-inline">
+                    <a href="{% url 'login' %}" class="form-control white-text bg-info mr-2">Connexion</a>
+                    <a href="{% url 'inscription' %}"
+                       class="form-control btn-dark-green  white-text mr-2">Inscription</a>
+                </div>
+            {% endif %}
+        </div>
+
+    </nav>
+</div>

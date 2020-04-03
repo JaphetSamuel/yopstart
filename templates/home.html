@@ -39,12 +39,12 @@
                         <label for="dev" class="custom-control-label">Dévéloppeurs</label>
                     </div>
                     <div class="mb-1 custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="devc" value="2" id="dev">
-                        <label for="dev" class="custom-control-label">Investisseur</label>
+                        <input type="checkbox" class="custom-control-input" name="devc" value="2" id="invest">
+                        <label for="invest" class="custom-control-label">Investisseur</label>
                     </div>
                     <div class="mb-1 custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="devc" value="2" id="dev" checked>
-                        <label for="dev" class="custom-control-label">Projets</label>
+                        <input type="checkbox" class="custom-control-input" name="devc" value="2" id="proj" checked>
+                        <label for="proj" class="custom-control-label">Projets</label>
                     </div>
 
 
@@ -63,24 +63,24 @@
                 <div class="flex-row">
                     <a class="align-self-end btn btn-info btn-sm">Liste complète</a>
                 </div>
-                {% for proj in list_projets %}
-                        <div class="card mb-3">
-                            <div class="">
-                                <span class="left">{{ proj.porteurs }}</span>
-                            </div>
-                            <hr class="divider">
-                        <div class="card-body row">
-                            <div class="col col-xs-12 col-md-2">
-                                <i class="fa fa-store-alt fa-5x"></i>
-                            </div>
-                            <div class="col col-xs-12 col-md-10">
-                                <p>{{ proj.description }}</p>
+                <div class="row">
+                    {% for proj in list_projets %}
+                        <div class="card mb-3 col-xs-12 col-md-4">
+                            <div class="card-body row">
+                                <div class="col col-xs-12 col-md-2">
+                                    <i class="fa fa-store-alt fa-5x"></i>
+                                </div>
+                                <div class="col col-xs-12 col-md-10">
+                                    <h2><a href="{% url 'projet-presentation' proj.id %}"
+                                           class="black-text font-weight-bolder">{{ proj.nom }}</a></h2>
+                                    <p>{{ proj.description }}</p>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                        {% empty %}
+                    {% empty %}
                         <span>Pas de resultats pour votre recherche</span>
                     {% endfor %}
+                </div>
 
             </main>
         </div>
