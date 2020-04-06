@@ -55,6 +55,7 @@ class Connexion(LoginView):
     template_name = 'account/connexion.html'
 
 
+
 def createUser(request):
     username = request.POST['username']
     prename = request.POST['prename']
@@ -71,7 +72,7 @@ def createUser(request):
         ut.save()
         login(request,u)
 
-    return redirect('profile',pk=ut.id)
+    return redirect('profile', pk=ut.id)
 
 class DeconnexionView(generic.RedirectView):
     pattern_name = 'home'

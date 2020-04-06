@@ -11,14 +11,16 @@
                     <img src="{{ MEDIA_URL }}{{ object.img_url }}" alt="none">
                 </div>
                 <p>
-                <h2>Description</h2>
-                <p>{{ object.description }}</p>
+                <h2 class="display-1">Description</h2>
+                <p class="h1">{{ object.description }}</p>
                 </p>
                 <p>
-                    <b>Porteur:</b> <span>{{ object.porteurs|capfirst }}</span> <br>
-                    <b>Domaine:</b> <span>{{ object.domaine }}</span> <br>
-                    <b>Date de debut:</b> <span>{{ object.date_debut |time|default_if_none:'non specifié' }}</span> <br>
-                    <b>Phase actuelle:</b> <span>{{ object.phase }}</span> <br>
+                    <b>Porteur:</b> <span class="font-weight-bold">{{ object.porteurs|capfirst }}</span> <br>
+                    <b>Domaine:</b> <span class="font-weight-bold">{{ object.domaine }}</span> <br>
+                    <b>Date de debut:</b> <span
+                        class="font-weight-bold">{{ object.date_debut |time|default_if_none:'non specifié' }}</span>
+                    <br>
+                    <b>Phase actuelle:</b> <span class="font-weight-bold">{{ object.phase }}</span> <br>
                 </p>
             </div>
         </div>

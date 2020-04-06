@@ -24,7 +24,8 @@
             {{ form.password }}
         </div>
         {% csrf_token %}
-        <input type="submit" class="mt-2 btn btn²" value="connexion" >
+        <input type="submit" class="mt-2 btn btn²" value="connexion">
+        <input type="hidden" name="next" value="{% url 'home' %}">
     </fieldset>
     <a href="" class="mt-5 ml-4">Mot de passe oublié</a>
 </form>

@@ -1,7 +1,8 @@
 {% extends 'blank.html' %}
 
 {% block main-content %}
-    <main class="container-fluid">
+    {% include 'layout/m-navbar.html' %}
+    <main class="container-fluid mt-5 m-3">
         <div class="row">
             <div class="col col-xs-12 col-md-3">
                 <div class="box">
@@ -9,10 +10,80 @@
                         <h1>Filtre</h1>
                     </div>
                     <div class="box-body">
-                        <form action="#">
-                            <input type="search" class="box-input" name="tags" placeholder="Recherche...">
+                        <form action="#" method="get">
+                            <input type="search" class="box-input form-control" name="tags" placeholder="Recherche...">
+                            <div class="mt-2">
+                                {% for dom in list_domaines %}
+                                    <div class="custom-control custom-checkbox">
+                                        <input {% if dom.pk in selected_doms %}checked{% else %}{% endif %}
+                                               type="checkbox" id="id_{{ dom.label }}" class="custom-control-input"
+                                               name="{{ dom.pk }}">
+                                        <label for="id_{{ dom.label }}"
+                                               class="custom-control-label">{{ dom.label }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <input type="submit" value="Recherche" class="btn btn-sm mr-1">
+                            <input type="reset" value="Reinitialiser" class="btn btn-sm mr-1">
 
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-9">
+                <div class="panel">
+                    <div class="panel-heading mb-2">Entete</div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        {% for object in object_list %}
+                            <div class="box col-xs-12 mr-1 col-md-4 ">
+                                <a href="{% url 'projet-presentation' object.id %}">
+                                    <div class="box-body">
+                                        <img src="{{ MEDIA_URL }}{{ object.img_url }}" width="70%" alt="aucun"
+                                             class="img-responsive float-left">
+                                        <h3>{{ object.nom }}</h3>
+                                        <p>
+                                            {{ object.description }}
+                                        </p>
+                                    </div>
+                                    <div class="box-footer">
+                                        <div class="box-tools">
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% empty %}
+                            <div class="alert-info text-center rounded offset-lg-4">
+                                <span class="alert-heading h3">Aucun resultat</span>
+                                <p class="">
+                                    Essayer avec une autre orthographe
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel-footer mt-1">
+                    <div class="pagination flex-center center-block">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fa fa-chevron-left"></i>
+                            </a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">
+                            <i class="fa fa-chevron-right"></i>
+                            </a>
+                        {% endif %}
+                    </span>
                     </div>
                 </div>
             </div>

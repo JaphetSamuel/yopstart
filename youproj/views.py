@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from django.shortcuts import render
 from .models import *
 from django.views import generic
@@ -30,3 +31,41 @@ class DashboardView(generic.DetailView):
 class PresentationView(generic.DetailView):
     model = Projet
     template_name = 'youproj/presentation.html'
+
+
+class listeProjetView(generic.ListView):
+    model = Projet
+    queryset = Projet.objects.all()
+    template_name = 'youproj/liste.html'
+    paginate_by = 10
+
+    # def get(self, request, *args, **kwargs):
+    #     if self.request.GET['domaine'] and self.request.GET['domaine'] != '':
+    #         self.queryset= Projet.objects.filter(domaine__label__contains=self.request.GET['domaine'])
+
+    #     return super().get(request, **kwargs)
+
+    def trystry(self, tab: list) -> list:
+        res: list = list()
+        for x in tab:
+            try:
+                res.append(int(x))
+            except:
+                pass
+        return res
+
+    def get_queryset(self):
+        query = Projet.objects.all()
+        params: QueryDict = self.request.GET
+        try:
+            if self.request.GET.get('tags', None) is not None:
+                print(self.request.GET.keys())
+                doms = self.trystry(self.request.GET.keys())
+                if doms.__len__() >= 1:
+                    self.extra_context = {'selected_doms': doms}
+                    self.queryset = Projet.objects.filter(domaine_id__in=doms)
+                if self.request.GET.get('tags', None) is not None:
+                    self.queryset.filter(tags__contains=self.request.GET['tags'])
+        except Exception as e:
+            print(e.__dict__)
+        return self.queryset
