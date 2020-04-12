@@ -93,6 +93,11 @@ def home(request):
     # if request.GET['competence'] and request.GET['competence'] != '' :
     #     devs = Utilisateur.objects.get(competences = request.GET['competence'])
 
-    #contexte['devs'] = devs
+    # contexte['devs'] = devs
 
     return render(request, template_name='home.html', context=contexte)
+
+
+class Presentation(generic.DetailView):
+    template_name = 'youself/presentation.html'
+    model = Utilisateur

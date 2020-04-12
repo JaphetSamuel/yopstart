@@ -3,25 +3,38 @@
 {% block main-content %}
     {% include 'layout/m-navbar.html' %}
     <main class="content">
-        <div class="container-fluid m-5">
+        <div class="container-fluid m-md-3 ">
             <div class="box p-4">
                 <h1 class="display-3">{{ object.nom }}</h1>
-                <div class="image">
-                    <!-- todo carousel -->
-                    <img src="{{ MEDIA_URL }}{{ object.img_url }}" alt="none">
-                </div>
+                <!-- todo carousel -->
+                <img src="{{ MEDIA_URL }}{{ object.img_url }}" alt="none"
+                     class="img-responsive img-fluid float-md-left">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>Domaine</td>
+                        <td class="font-weight-bold">{{ object.domaine }}</td>
+                    </tr>
+                    <tr>
+                        <td>Initiateur</td>
+                        <td class="font-weight-bold">
+                            <a href="{% url 'utilisateur-presentation' object.porteurs.id %}">
+                                {{ object.porteurs.user.get_full_name }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phase</td>
+                        <td class="font-weight-bold">{{ object.get_phase_display }}</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <p>
                 <h2 class="display-1">Description</h2>
                 <p class="h1">{{ object.description }}</p>
+                {% lorem 5 %}
                 </p>
-                <p>
-                    <b>Porteur:</b> <span class="font-weight-bold">{{ object.porteurs|capfirst }}</span> <br>
-                    <b>Domaine:</b> <span class="font-weight-bold">{{ object.domaine }}</span> <br>
-                    <b>Date de debut:</b> <span
-                        class="font-weight-bold">{{ object.date_debut |time|default_if_none:'non specifié' }}</span>
-                    <br>
-                    <b>Phase actuelle:</b> <span class="font-weight-bold">{{ object.phase }}</span> <br>
-                </p>
+
             </div>
         </div>
     </main>

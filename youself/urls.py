@@ -9,4 +9,5 @@ urlpatterns = [
     path('inscription-check/', views.createUser, name="createUser"),
     path('conexion/', views.Connexion.as_view(), name='login'),
     path('deconnexion/', views.DeconnexionView.as_view(),name='deconnexion'),
+    path('presentation/<int:pk>/', views.Presentation.as_view(), name='utilisateur-presentation')
 ]
