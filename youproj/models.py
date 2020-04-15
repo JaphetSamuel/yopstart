@@ -36,6 +36,60 @@ class Finance(models.Model):
     def somme_restante(self):
         return self.somme_investi - self.somme_depense
 
+    def __str__(self):
+        return f"finance du projet {self.projet.nom}"
+
+
+class Mediatisation(models.Model):
+    projet = models.OneToOneField("Projet", on_delete=models.CASCADE)
+    listeImageUrls = []
+
+    # REGION
+    def siteDeDepot(self):
+        return f"{self.projet.id}/Media"
+
+    def helpText(self):
+        if self.listeImageUrls.__len__() == 0:
+            return "Ajouter une image"
+        else:
+            return "Ajouter une autre image"
+
+    # ENDREGION
+
+    img = models.ImageField(upload_to=projet, help_text=helpText)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.listeImageUrls.append(self.img)
+        return super().save()
+
+    def __str__(self):
+        return f"fichier media du projet {self.projet.nom}"
+
+
+class Activite(models.Model):
+    projet = models.ForeignKey("Projet", on_delete=models.CASCADE)
+    titre = models.CharField(max_length=100)
+    details = models.TextField()
+
+
+class Tache(models.Model):
+    activite = models.ForeignKey(Activite, on_delete=models.CASCADE)
+    debut_date = models.DateField(verbose_name="Date de debut", blank=True)
+    fin_date = models.DateField(verbose_name="Date de fin", blank=True)
+    titre = models.CharField(max_length=100)
+    details = models.TextField()
+
+    Etat_activite = (
+        ("1", "En attente"),
+        ("2", "En cour"),
+        ("3", "Terminée"),
+        ("4", "Suspendu"),
+        ("0", "Annulée")
+    )
+
+    etat = models.CharField(max_length=20, choices=Etat_activite)
+
 
 class Projet(models.Model):
     etats = (
