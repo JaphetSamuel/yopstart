@@ -1,7 +1,9 @@
 <div class="main-sidebar">
     <div class="sidebar">
         <div class="user-panel">
-            <span>user.nom</span>
+                <img src="{{ MEDIA_URL }}{{ object.img_url }}" alt="none" height="100">
+            <br>
+                <span class="font-weight-bolder">{{ object.nom |capfirst }}</span>
         </div>
     </div>
 </div>
